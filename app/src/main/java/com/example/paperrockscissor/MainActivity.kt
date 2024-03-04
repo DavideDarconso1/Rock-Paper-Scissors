@@ -3,6 +3,7 @@ package com.example.paperrockscissor
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +21,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -77,6 +80,7 @@ fun ButtonsTxt() {
         Row(
             Modifier.padding(bottom = 16.dp)
         ) {
+            //ROCK
             Button(
                 onClick = { number = 0
                     pcNumber = computer();
@@ -90,12 +94,90 @@ fun ButtonsTxt() {
                         win = 1
                         point++
                     }
-            }) {
-
-            }
+                    if(number == pcNumber || number == pcNumber || number == pcNumber )
+                    {
+                        win = 2
+                    }
+            }) {Text(text = "rock")}
+            // PAPER
+            Button(
+                onClick = { number = 0
+                    pcNumber = computer();
+                    if(number == 0 && pcNumber == 1 || number == 1 && pcNumber == 2 || number == 2 && pcNumber == 0)
+                    {
+                        win = 0
+                        pcPoint++
+                    }
+                    if(number == 1 && pcNumber == 0 || number == 2 && pcNumber == 1 || number == 0 && pcNumber == 2)
+                    {
+                        win = 1
+                        point++
+                    }
+                    if(number == pcNumber || number == pcNumber || number == pcNumber )
+                    {
+                        win = 2
+                    }
+                }) {Text(text = "paper")}
+            // SCISSORS
+            Button(
+                onClick = { number = 0
+                    pcNumber = computer();
+                    if(number == 0 && pcNumber == 1 || number == 1 && pcNumber == 2 || number == 2 && pcNumber == 0)
+                    {
+                        win = 0
+                        pcPoint++
+                    }
+                    if(number == 1 && pcNumber == 0 || number == 2 && pcNumber == 1 || number == 0 && pcNumber == 2)
+                    {
+                        win = 1
+                        point++
+                    }
+                    if(number == pcNumber || number == pcNumber || number == pcNumber )
+                    {
+                        win = 2
+                    }
+                }) {Text(text = "scissors")}
         }
+        Row {
+            Text(
+                modifier = Modifier.padding(top = 16.dp),
+                fontSize = 36.sp,
+                text = ""+point
+            )
+            immage(number)
+            immage(pcNumber)
+            Text(
+                modifier = Modifier.padding(top = 16.dp),
+                fontSize = 36.sp,
+                text = ""+pcPoint
+            )
+
+        }
+        if (win == 0){
+            text = stringResource(R.string.perso)
+        }
+        if (win == 0){
+            text = stringResource(R.string.vinto)
+        }
+        if (win == 0){
+            text = stringResource(R.string.pareggio)
+        }
+
     }
 
+}
+
+@Composable
+fun immage(number: Int)  {
+    if(number == 0){
+        Image(painter = painterResource(R.drawable.rock), contentDescription = null)
+    }
+    if(number == 0){
+        Image(painter = painterResource(R.drawable.paper), contentDescription = null)
+    }
+    if(number == 0){
+        Image(painter = painterResource(R.drawable.scissors), contentDescription = null)
+    }
 }
 
 fun computer(): Int{
